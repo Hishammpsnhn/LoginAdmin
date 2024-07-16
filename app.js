@@ -7,6 +7,7 @@ import nocache from 'nocache';
 import data from './utils.js';
 import { checkAuth, checkNotAuth } from './middleware/authMiddleware.js'
 import notFound from './middleware/notFound.js';
+import connectDB from './middleware/db.js';
 
 dotenv.config();
 
@@ -15,6 +16,10 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
+// DB connection
+connectDB();
 
 // Session 
 app.use(session({
