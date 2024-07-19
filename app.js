@@ -9,6 +9,11 @@ import { checkAdmin, checkAuth, checkNotAuth } from './middleware/authMiddleware
 import notFound from './middleware/notFound.js';
 import adminRoute from './router/adminRoute.js'
 import connectDB from './middleware/db.js';
+import path from 'path'
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url); 
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -35,7 +40,7 @@ app.use(session({
 app.set('view engine', 'ejs');
 
 // Static Files
-// app.use(express.static(path.join(__dirname, 'public')));
+ app.use(express.static(path.join(__dirname, 'public')));
  //app.use(express.static("public"));
 
 // No-cache Middleware
@@ -74,8 +79,10 @@ app.get('/login',checkNotAuth,  (req, res) => {
         res.render('login');
     }
 });
-app.get('/admin',checkAdmin,(req,res)=>{
+app.get('/admin/createUser',checkAdmin, (req, res) => {
+    res.render('createUser', {msg:req.session.errMessage && req.session.errMessage });
 })
+
 
 //not found
 app.use(notFound)

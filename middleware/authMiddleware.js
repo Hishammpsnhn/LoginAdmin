@@ -1,5 +1,6 @@
 function checkAuth(req, res, next) {
   if (req.session.email) {
+    console.log("email there")
     next();
   } else {
     req.session.passwordWrong = false;

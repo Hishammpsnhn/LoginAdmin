@@ -2,6 +2,7 @@ import { errorMsg, sessionStore } from "../middleware/authMiddleware.js";
 import User from "../model/userSchema.js";
 import validator from "validator";
 import bcrypt from "bcrypt";
+
 // @desc    login user credentials
 // @route   POST /route/login
 export const login = async (req, res) => {
